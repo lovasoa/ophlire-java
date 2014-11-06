@@ -1,7 +1,7 @@
 # Ophlire-java
 Recherche de mots du lexique français par les phonèmes qu'ils contiennent et leur réalisation orthographique.
 
-## But
+## Objectif
 Générer des listes de mots qui «s'écrivent comme ils se prononcent», ou
 de mots qui contiennent une diphtongue particulière, par exemple.
 
