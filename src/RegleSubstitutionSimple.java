@@ -17,8 +17,15 @@ public class RegleSubstitutionSimple extends ReglePhonetique {
 		if (this.applicable(l)) {
 			l.getLecteurOrtho().consume(ortho);
 			l.getLecteurPhono().consume(phono);
+			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public String toString() {
+		return "RegleSubstitutionSimple [ortho=" + ortho + ", phono=" + phono
+				+ "]";
 	}
 
 	public String getOrtho() {
