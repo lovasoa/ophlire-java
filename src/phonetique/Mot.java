@@ -1,4 +1,6 @@
+package phonetique;
 import java.util.ArrayList;
+
 
 public class Mot {
 	private String orthographe;
@@ -24,7 +26,7 @@ public class Mot {
 
 		recherche: while (true) {
 			for (ReglePhonetique r : reglesPhonetiques) {
-				if (r.appliquer(lecteur)) {
+				if (r.appliquer(lecteur) != null) {
 					liste.add(r);
 					continue recherche;
 				}

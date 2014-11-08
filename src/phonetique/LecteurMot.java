@@ -1,3 +1,6 @@
+package phonetique;
+import lecteurString.LecteurString;
+
 
 public class LecteurMot {
 	private LecteurString lecteurOrtho;

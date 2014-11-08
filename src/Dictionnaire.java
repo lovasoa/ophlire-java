@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+import phonetique.ReglePhonetique;
+
+
 
 public class Dictionnaire {
 	private ArrayList<ReglePhonetique> regles;
