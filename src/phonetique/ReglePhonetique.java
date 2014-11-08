@@ -10,4 +10,5 @@ public abstract class ReglePhonetique {
 	public Object getPhono() {
 		return "[Non Representable]";
 	}
+	public abstract String getNomType();
 }

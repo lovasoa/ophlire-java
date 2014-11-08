@@ -1,39 +1,36 @@
 package gui;
 
 import java.awt.BorderLayout;
-import java.awt.MenuBar;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
+import java.sql.SQLException;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-import javax.swing.GroupLayout;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.table.DefaultTableModel;
-import java.awt.GridLayout;
-import javax.swing.BoxLayout;
-import java.awt.FlowLayout;
-import javax.swing.SwingConstants;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import data.Database;
 
 public class MainWindow extends JFrame{
-    private TableauRegles table;
+	private static final long serialVersionUID = 1L;
+	private TableauRegles tableauRegles;
     private JButton btnAdd;
     private JTextField txtFieldOrtho;
     private JTextField txtFieldPhono;
-
+    private Database openedDb = null;
+    
     private MainWindow() {
         createGUI();
     }
@@ -41,8 +38,8 @@ public class MainWindow extends JFrame{
     private void createGUI() {
         getContentPane().setLayout(new BorderLayout());
         JScrollPane pane = new JScrollPane();
-        table = new TableauRegles();
-        pane.setViewportView(table);
+        tableauRegles = new TableauRegles();
+        pane.setViewportView(tableauRegles);
         JPanel westPanel = new JPanel();
         westPanel.setLayout(new GridLayout(2,1));
         
@@ -54,9 +51,10 @@ public class MainWindow extends JFrame{
         panel_1.add(textFieldsPanel);
         textFieldsPanel.setLayout(new GridLayout(2, 2, 3, 10));
 
-        Action actionAjouter = new AbstractAction("Send") {
+        @SuppressWarnings("serial")
+		Action actionAjouter = new AbstractAction("Send") {
             public void actionPerformed(ActionEvent e) {
-                table.getModel().addRowAfterSelection(txtFieldOrtho.getText(),txtFieldPhono.getText());
+                tableauRegles.getModel().addRowAfterSelection(txtFieldOrtho.getText(),txtFieldPhono.getText());
                 txtFieldPhono.setText("");
                 txtFieldOrtho.grabFocus();
                 txtFieldOrtho.selectAll();
@@ -89,7 +87,7 @@ public class MainWindow extends JFrame{
         btnSuppr.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                table.getModel().removeRows(table.getSelectedRows());
+                tableauRegles.getModel().removeRows(tableauRegles.getSelectedRows());
             }
         });
         getContentPane().add(pane,BorderLayout.CENTER);
@@ -101,31 +99,62 @@ public class MainWindow extends JFrame{
     	JMenuBar menuBar = new JMenuBar();
 
     	//Build the first menu.
-    	JMenu menu = new FileMenu();
+    	JMenu menu = new FileMenu(this);
     	menuBar.add(menu);
     	return menuBar;
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-
+    public static Runnable getRunnable() {
+    	return new Runnable() {
             @Override
             public void run() {
             	// Native Look and feel
-				try {
-					UIManager.setLookAndFeel(UIManager
-							.getSystemLookAndFeelClassName());
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+//				try {
+//					UIManager.setLookAndFeel(UIManager
+//							.getSystemLookAndFeelClassName());
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
             	MainWindow frm = new MainWindow();
                 frm.setLocationByPlatform(true);
                 frm.setJMenuBar(frm.getJMenuBar());
                 frm.pack();
                 frm.setDefaultCloseOperation(EXIT_ON_CLOSE);
                 frm.setVisible(true);
-            }
-
-        });
+            };
+        };
     }
-} 
+
+	public TableauRegles getTableauRegles() {
+		return tableauRegles;
+	}
+
+	public Database getDatabase() {
+		if (openedDb == null) {
+			// Choix d'un fichier de base de données
+			JFileChooser chooser = new JFileChooser();
+			FileNameExtensionFilter filter = new FileNameExtensionFilter(
+					"Base de données SQLite de dictionnaire et règles de prononciation",
+					"db");
+			chooser.setFileFilter(filter);
+			int returnVal = chooser.showOpenDialog(this);
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				try {
+					openedDb = new Database(chooser.getSelectedFile());
+				} catch (ClassNotFoundException | SQLException e1) {
+					displayError("Erreur à l'ouverture de la base",
+							"Impossible d'ouvrir la base de données:\n" + e1.getMessage());
+
+				}
+			}		}
+		return openedDb;
+	}
+	
+	public void displayError(String title, String description) {
+		JOptionPane.showMessageDialog(
+				this,
+				description,
+				title,
+				JOptionPane.ERROR_MESSAGE);
+	}
+}

@@ -2,13 +2,12 @@ package gui;
 
 import javax.swing.table.AbstractTableModel;
 
-import data.ListeRegles;
-
-import phonetique.LecteurMot;
 import phonetique.ReglePhonetique;
 import phonetique.RegleSubstitution;
+import data.ListeRegles;
 
 public class ReglesTableModel extends AbstractTableModel {
+	private static final long serialVersionUID = 1L;
 	private ListeRegles liste;
 	private TableauRegles table;
 
@@ -85,6 +84,12 @@ public class ReglesTableModel extends AbstractTableModel {
 
 	public ListeRegles getListe() {
 		return liste;
+	}
+
+	public void setListe(ListeRegles liste) {
+		assert(liste != null);
+		this.liste = liste;
+		this.fireTableDataChanged();
 	}
 
 	public TableauRegles getTable() {

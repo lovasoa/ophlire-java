@@ -39,15 +39,15 @@ public class TestMot {
 		
 
 		assertEquals(
-				"[(s -> s), (an -> @), (/s$/ -> )]",
+				"[(s -> s), (an -> @), (s$ -> )]",
 				sans.listeReglesPhonetiques(regles).toString());
 
 		assertEquals(
-				"[(d -> d), (an -> @), (/s$/ -> )]",
+				"[(d -> d), (an -> @), (s$ -> )]",
 				dans.listeReglesPhonetiques(regles).toString());
 
 		assertEquals(
-				"[(/e(?=[bcdfghklmnpqrstvwxz]{2})/ -> E), (ss -> s), (/e$/ -> )]",
+				"[(e(?=[bcdfghklmnpqrstvwxz]{2}) -> E), (ss -> s), (e$ -> )]",
 				esse.listeReglesPhonetiques(regles).toString());
 		
 		// On n'a pas précisé de règle pour prononcer 't', on ne peut donc pas prononcer 'dansant'

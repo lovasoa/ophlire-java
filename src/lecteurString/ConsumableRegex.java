@@ -31,6 +31,6 @@ public class ConsumableRegex extends Consumable {
 	
 	@Override
 	public String toString() {
-		return "/" + reg.pattern().substring(1) + "/";
+		return reg.pattern().substring(1);
 	}
 }

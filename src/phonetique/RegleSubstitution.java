@@ -5,6 +5,7 @@ import lecteurString.LecteurString;
 
 
 public class RegleSubstitution extends ReglePhonetique {
+	public static final String nomType = "SUBS";
 	private Consumable ortho;
 	private Consumable phono;
 	
@@ -47,6 +48,11 @@ public class RegleSubstitution extends ReglePhonetique {
 
 	public Consumable getPhono() {
 		return phono;
+	}
+
+	@Override
+	public String getNomType() {
+		return RegleSubstitution.nomType;
 	}
 
 }
