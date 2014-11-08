@@ -3,6 +3,7 @@ package gui;
 import javax.swing.table.AbstractTableModel;
 
 import phonetique.ReglePhonetique;
+import phonetique.RegleRegex;
 import phonetique.RegleSubstitution;
 import data.ListeRegles;
 
@@ -58,24 +59,36 @@ public class ReglesTableModel extends AbstractTableModel {
 		}
 	}
 	
-	public void addRow(String ortho, String phono) {
-		liste.add(new RegleSubstitution(ortho, phono));
-		this.fireTableRowsInserted(getRowCount(), getRowCount());
+	public void addRow(ReglePhonetique r, int pos) {
+		liste.add(pos, r);
+		this.fireTableRowsInserted(pos, pos);
+		this.table.selectRow(pos);
+	}
+
+	public void addRow(String ortho, String phono, int pos) {
+		ReglePhonetique r;
+		if (ortho.startsWith("/") && ortho.endsWith("/")) {
+			// REGEX
+			r = new RegleRegex(ortho.substring(1, ortho.length()-1), phono);
+		} else {
+			// Normal replacement
+			r = new RegleSubstitution(ortho, phono);
+		}
+		addRow(r, pos);
 	}
 	
 	public void addRowAfterSelection (String ortho, String phono) {
 		int[] selected = this.table.getSelectedRows();
 		int last = (selected.length == 0) ? this.getListe().size() : selected[selected.length-1]+1;
-		liste.add(last, new RegleSubstitution(ortho, phono));
-		this.fireTableRowsInserted(last, last);
-		this.table.selectRow(last);
+		addRow(ortho, phono, last);
 	}
 
 	public void removeRow(int pos) {
 		liste.remove(pos);
-		this.fireTableRowsDeleted(pos, pos);
+		fireTableRowsDeleted(pos, pos);
+		if (pos < getRowCount()) table.selectRow(pos);
 	}
-	
+
 	public void removeRows(int[] pos) {
 		for (int i:pos) {
 			removeRow(i);

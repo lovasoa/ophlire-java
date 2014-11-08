@@ -6,11 +6,10 @@ import java.sql.SQLException;
 
 import data.Database;
 
-public class OpenFileAction implements ActionListener {
+public class ActionFileOpen implements ActionListener {
 	private MainWindow mainWindow;
 
-	public OpenFileAction(MainWindow mainWindow) {
-		super();
+	public ActionFileOpen(MainWindow mainWindow) {
 		this.mainWindow = mainWindow;
 	}
 

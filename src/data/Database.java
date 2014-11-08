@@ -1,12 +1,15 @@
 package data;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import phonetique.Mot;
 import phonetique.ReglePhonetique;
 import phonetique.RegleRegex;
 import phonetique.RegleSubstitution;
@@ -66,5 +69,23 @@ public class Database {
 			insertRegle.setFloat(4, prio--);
 			insertRegle.executeUpdate();
 		}
+	}
+	
+	public void exportMatching(File out, ListeRegles liste) throws FileNotFoundException,SQLException {
+		PrintWriter writer = new PrintWriter(out);
+		ResultSet rs = connection
+				.createStatement()
+				.executeQuery(
+						"SELECT ortho,phono FROM Mot");
+		int i=0;
+		while (rs.next()) {
+			System.out.print(++i + "\r");
+			Mot m = new Mot(rs.getString(1), rs.getString(2));
+			if (m.listeReglesPhonetiques(liste) != null) {
+				writer.println(m.getOrthographe());
+			}
+		}
+		writer.close();
+		System.out.println("Recherche terminée");
 	}
 }

@@ -91,6 +91,14 @@ public class MainWindow extends JFrame{
             }
         });
         getContentPane().add(pane,BorderLayout.CENTER);
+
+        JPanel boutonsDico = new JPanel();
+        getContentPane().add(boutonsDico, BorderLayout.EAST);
+        boutonsDico.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        
+        JButton btnExport = new JButton("Exporter les mots");
+        btnExport.addActionListener(new ActionExportMot(this));
+        boutonsDico.add(btnExport);
     }
     
     @Override
@@ -133,6 +141,7 @@ public class MainWindow extends JFrame{
 		if (openedDb == null) {
 			// Choix d'un fichier de base de données
 			JFileChooser chooser = new JFileChooser();
+			chooser.setDialogTitle("Base de données de mots et règles orthographiques");
 			FileNameExtensionFilter filter = new FileNameExtensionFilter(
 					"Base de données SQLite de dictionnaire et règles de prononciation",
 					"db");

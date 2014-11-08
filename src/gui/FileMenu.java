@@ -22,13 +22,13 @@ public class FileMenu extends JMenu {
 		JMenuItem ouvrir = new JMenuItem("Ouvrir", KeyEvent.VK_O);
 		ouvrir.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
 				ActionEvent.CTRL_MASK));
-		ouvrir.addActionListener(new OpenFileAction(mainWindow));
+		ouvrir.addActionListener(new ActionFileOpen(mainWindow));
 		add(ouvrir);
 		
 		JMenuItem save = new JMenuItem("Sauvegarder", KeyEvent.VK_S);
 		save.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
 				ActionEvent.CTRL_MASK));
-		save.addActionListener(new SaveFileAction(mainWindow));
+		save.addActionListener(new ActionFileSave(mainWindow));
 		add(save);
 	}
 	

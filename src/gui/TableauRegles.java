@@ -9,6 +9,7 @@ public class TableauRegles extends JTable {
 		super();
 	    tableModel = new ReglesTableModel(this);
 	    this.setModel(tableModel);
+	    this.setDefaultRenderer(Object.class, new ConsumableRenderer());
 	}
 	
 	
