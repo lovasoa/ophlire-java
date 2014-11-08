@@ -5,11 +5,6 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-
-/**
- * 
- */
-
 /**
  * @author olojkine
  * 
