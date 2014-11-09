@@ -83,16 +83,13 @@ public class ReglesTableModel extends AbstractTableModel {
 		addRow(ortho, phono, last);
 	}
 
-	public void removeRow(int pos) {
+	protected void removeElem(int pos, boolean fireChange) {
 		liste.remove(pos);
-		fireTableRowsDeleted(pos, pos);
-		if (pos < getRowCount()) table.selectRow(pos);
+		if (fireChange) fireTableRowsDeleted(pos, pos);
 	}
 
-	public void removeRows(int[] pos) {
-		for (int i:pos) {
-			removeRow(i);
-		}
+	public void removeElem(int pos) {
+		removeElem(pos, true);
 	}
 
 	public ListeRegles getListe() {

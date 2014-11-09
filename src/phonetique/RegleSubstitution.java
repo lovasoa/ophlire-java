@@ -8,6 +8,7 @@ public class RegleSubstitution extends ReglePhonetique {
 	public static final String nomType = "SUBS";
 	private Consumable ortho;
 	private Consumable phono;
+	public String description;
 	
 	public RegleSubstitution(Consumable ortho, String phono) {
 		this.ortho = ortho;

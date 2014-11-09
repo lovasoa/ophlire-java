@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 import javax.swing.AbstractAction;
@@ -84,12 +83,7 @@ public class MainWindow extends JFrame{
         
         JButton btnSuppr = new JButton("Supprimer");
         panel.add(btnSuppr);
-        btnSuppr.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                tableauRegles.getModel().removeRows(tableauRegles.getSelectedRows());
-            }
-        });
+        btnSuppr.addActionListener(new ActionSupprRegle(tableauRegles));
         getContentPane().add(pane,BorderLayout.CENTER);
 
         JPanel boutonsDico = new JPanel();
