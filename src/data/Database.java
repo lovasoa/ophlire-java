@@ -45,20 +45,22 @@ public class Database {
 			default:
 				System.err
 						.println("Type de règle non supporté rencontré dans la BDD. "
-							    +"Règle: [type="
+								+ "Règle: [type="
 								+ type
 								+ ", ortho="
 								+ rs.getString(2)
 								+ ", phono="
 								+ rs.getString(3) + "]");
 			}
-			if (regle != null) liste.add(regle);
+			if (regle != null)
+				liste.add(regle);
 		}
 		return liste;
 	}
 
 	public void setListeRegles(ListeRegles liste) throws SQLException {
-		connection.createStatement().executeUpdate("DELETE FROM ReglePhonetique");
+		connection.createStatement().executeUpdate(
+				"DELETE FROM ReglePhonetique");
 		PreparedStatement insertRegle = connection
 				.prepareStatement("INSERT OR IGNORE INTO ReglePhonetique (type, ortho, phono, prio) VALUES (?,?,?,?)");
 		int prio = liste.size();
@@ -70,14 +72,15 @@ public class Database {
 			insertRegle.executeUpdate();
 		}
 	}
-	
-	public void exportMatching(File out, ListeRegles liste) throws FileNotFoundException,SQLException {
+
+	public void exportMatching(File out, ListeRegles liste)
+			throws FileNotFoundException, SQLException {
 		PrintWriter writer = new PrintWriter(out);
 		ResultSet rs = connection
 				.createStatement()
 				.executeQuery(
-						"SELECT ortho,phono FROM Mot");
-		int i=0;
+						"SELECT DISTINCT ortho,phono FROM Mot ORDER BY freqlemfilms DESC");
+		int i = 0;
 		while (rs.next()) {
 			System.out.print(++i + "\r");
 			Mot m = new Mot(rs.getString(1), rs.getString(2));
