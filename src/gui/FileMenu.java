@@ -1,5 +1,6 @@
 package gui;
 
+import gui.actions.ActionExportMot;
 import gui.actions.ActionFileOpen;
 import gui.actions.ActionFileSave;
 
@@ -33,6 +34,10 @@ public class FileMenu extends JMenu {
 				ActionEvent.CTRL_MASK));
 		save.addActionListener(new ActionFileSave(mainWindow));
 		add(save);
+
+		JMenuItem export = new JMenuItem("Exporter", KeyEvent.VK_E);
+		save.addActionListener(new ActionExportMot(mainWindow));
+		add(export);
 	}
 	
 }

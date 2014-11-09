@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import phonetique.ListeRegles;
 import phonetique.Mot;
 import phonetique.ReglePhonetique;
 import phonetique.RegleRegex;
@@ -73,21 +74,28 @@ public class Database {
 		}
 	}
 
-	public void exportMatching(File out, ListeRegles liste, DbListWordsRequest req)
+	public void exportMatching(File out, ListeRegles liste,
+			ListeRegles selection, DbListWordsRequest req)
 			throws FileNotFoundException, SQLException {
 		PrintWriter writer = new PrintWriter(out);
-		ResultSet rs = connection
-				.createStatement()
+		ResultSet rs = connection.createStatement()
 				.executeQuery(req.toString());
 		int i = 0;
 		while (rs.next()) {
 			System.out.print(++i + "\r");
 			Mot m = new Mot(rs.getString(1), rs.getString(2));
-			if (m.listeReglesPhonetiques(liste) != null) {
+			ListeRegles reglesMot = m.listeReglesPhonetiques(liste);
+			if (reglesMot != null
+					&& (selection == null || reglesMot.containsAll(selection))) {
 				writer.println(m.getOrthographe());
 			}
 		}
 		writer.close();
 		System.out.println("Recherche terminée");
+	}
+
+	public void exportMatching(File out, ListeRegles liste,
+			DbListWordsRequest req) throws FileNotFoundException, SQLException {
+		exportMatching(out, liste, null, req);
 	}
 }

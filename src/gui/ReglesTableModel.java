@@ -2,10 +2,11 @@ package gui;
 
 import javax.swing.table.AbstractTableModel;
 
+import phonetique.LecteurMot;
+import phonetique.ListeRegles;
 import phonetique.ReglePhonetique;
 import phonetique.RegleRegex;
 import phonetique.RegleSubstitution;
-import data.ListeRegles;
 
 public class ReglesTableModel extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
@@ -22,7 +23,7 @@ public class ReglesTableModel extends AbstractTableModel {
 	public int getColumnCount() {
 		return 2;
 	}
-	
+
 	@Override
 	public String getColumnName(int column) {
 		switch (column) {
@@ -33,6 +34,11 @@ public class ReglesTableModel extends AbstractTableModel {
 		default:
 			return "No Name";
 		}
+	}
+
+	@Override
+	public Class<?> getColumnClass(int column) {
+		return LecteurMot.class;
 	}
 
 	@Override
@@ -58,7 +64,11 @@ public class ReglesTableModel extends AbstractTableModel {
 			return null;
 		}
 	}
-	
+
+	public ReglePhonetique getRowAt(int rowIndex) {
+		return liste.get(rowIndex);
+	}
+
 	public void addRow(ReglePhonetique r, int pos) {
 		liste.add(pos, r);
 		this.fireTableRowsInserted(pos, pos);
@@ -69,23 +79,25 @@ public class ReglesTableModel extends AbstractTableModel {
 		ReglePhonetique r;
 		if (ortho.startsWith("/") && ortho.endsWith("/")) {
 			// REGEX
-			r = new RegleRegex(ortho.substring(1, ortho.length()-1), phono);
+			r = new RegleRegex(ortho.substring(1, ortho.length() - 1), phono);
 		} else {
 			// Normal replacement
 			r = new RegleSubstitution(ortho, phono);
 		}
 		addRow(r, pos);
 	}
-	
-	public void addRowAfterSelection (String ortho, String phono) {
+
+	public void addRowAfterSelection(String ortho, String phono) {
 		int[] selected = this.table.getSelectedRows();
-		int last = (selected.length == 0) ? this.getListe().size() : selected[selected.length-1]+1;
+		int last = (selected.length == 0) ? this.getListe().size()
+				: selected[selected.length - 1] + 1;
 		addRow(ortho, phono, last);
 	}
 
 	protected void removeElem(int pos, boolean fireChange) {
 		liste.remove(pos);
-		if (fireChange) fireTableRowsDeleted(pos, pos);
+		if (fireChange)
+			fireTableRowsDeleted(pos, pos);
 	}
 
 	public void removeElem(int pos) {
@@ -97,7 +109,7 @@ public class ReglesTableModel extends AbstractTableModel {
 	}
 
 	public void setListe(ListeRegles liste) {
-		assert(liste != null);
+		assert (liste != null);
 		this.liste = liste;
 		this.fireTableDataChanged();
 	}

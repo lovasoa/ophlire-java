@@ -1,5 +1,4 @@
 package phonetique;
-import java.util.ArrayList;
 
 
 public class Mot {
@@ -19,10 +18,10 @@ public class Mot {
 		return orthographe;
 	}
 
-	public Iterable<ReglePhonetique> listeReglesPhonetiques(
+	public ListeRegles listeReglesPhonetiques(
 			Iterable<ReglePhonetique> reglesPhonetiques) {
 		LecteurMot lecteur = new LecteurMot(this);
-		ArrayList<ReglePhonetique> liste = new ArrayList<>();
+		ListeRegles liste = new ListeRegles();
 
 		recherche: while (true) {
 			for (ReglePhonetique r : reglesPhonetiques) {
