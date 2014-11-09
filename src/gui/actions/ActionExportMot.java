@@ -33,9 +33,10 @@ public class ActionExportMot implements ActionListener {
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			Database db = mainWindow.getDatabase();
 			try {
+				DbListWordsRequest req = new DbListWordsRequest(null,null);
 				db.exportMatching(chooser.getSelectedFile(),
 						mainWindow.getTableauRegles().getModel().getListe(),
-						new DbListWordsRequest());
+						req);
 			} catch (FileNotFoundException | SQLException e1) {
 				mainWindow.displayError("Erreur lors de l'exportation",
 						"L'exportation a échoué. Message de la base de données:\n"+e1.getMessage());
