@@ -33,7 +33,10 @@ public class ActionExportMot implements ActionListener {
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			Database db = mainWindow.getDatabase();
 			try {
-				DbListWordsRequest req = new DbListWordsRequest(null,null);
+				DbListWordsRequest req = new DbListWordsRequest(
+						Integer.parseInt(mainWindow.getPanelDico().getTxtFieldNbLettresMin().getText()),
+						Integer.parseInt(mainWindow.getPanelDico().getTxtFieldNbLettresMax().getText())
+						);
 				db.exportMatching(chooser.getSelectedFile(),
 						mainWindow.getTableauRegles().getModel().getListe(),
 						req);

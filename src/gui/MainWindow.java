@@ -1,6 +1,5 @@
 package gui;
 
-import gui.actions.ActionExportMot;
 import gui.actions.ActionSupprRegle;
 
 import java.awt.BorderLayout;
@@ -21,9 +20,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import data.Database;
@@ -35,7 +32,7 @@ public class MainWindow extends JFrame {
 	private JTextField txtFieldOrtho;
 	private JTextField txtFieldPhono;
 	private Database openedDb = null;
-	private JPanel boutonsDico;
+	private PanelDico panelDico;
 
 	private MainWindow() {
 		createGUI();
@@ -113,8 +110,12 @@ public class MainWindow extends JFrame {
 		btnSuppr.addActionListener(new ActionSupprRegle(tableauRegles));
 		getContentPane().add(pane, BorderLayout.CENTER);
 
-		boutonsDico = new PanelDico(this);
-		getContentPane().add(boutonsDico, BorderLayout.EAST);
+		panelDico = new PanelDico(this);
+		getContentPane().add(panelDico, BorderLayout.EAST);
+	}
+
+	public PanelDico getPanelDico() {
+		return this.panelDico;
 	}
 
 	@Override

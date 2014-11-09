@@ -45,7 +45,7 @@ public class DbListWordsRequest {
 		String whereClause = whereClause();
 		return "SELECT DISTINCT ortho,phono "
 				+"FROM Mot "
-				+ ((whereClause==null) ? "" : "WHERE "+whereClause)
+				+ ((whereClause==null) ? "" : "WHERE "+whereClause+" ")
 				+"ORDER BY freqlemfilms DESC";
 	}
 }

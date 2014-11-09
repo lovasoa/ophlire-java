@@ -17,8 +17,15 @@ public class PanelDico extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private MainWindow mainWindow;
+	private JTextField txtFieldNbLettresMax;
 
-	public PanelDico() {super();createGUI();}
+	private JTextField txtFieldNbLettresMin;
+
+	public PanelDico() {
+		super();
+		createGUI();
+	}
+
 	public PanelDico(MainWindow mainWindow) {
 		super();
 		this.mainWindow = mainWindow;
@@ -44,17 +51,17 @@ public class PanelDico extends JPanel {
 		gbc_label.gridy = 1;
 		add(label, gbc_label);
 
-		JTextField txtFieldMinLettres = new JTextField();
-		txtFieldMinLettres
+		txtFieldNbLettresMin = new JTextField();
+		txtFieldNbLettresMin
 				.setToolTipText("nombre minimum de lettres que doit avoir un mot pour être exporté");
-		txtFieldMinLettres.setText("3");
-		txtFieldMinLettres.setHorizontalAlignment(SwingConstants.LEFT);
-		txtFieldMinLettres.setColumns(2);
+		txtFieldNbLettresMin.setText("3");
+		txtFieldNbLettresMin.setHorizontalAlignment(SwingConstants.LEFT);
+		txtFieldNbLettresMin.setColumns(2);
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.insets = new Insets(0, 0, 5, 5);
 		gbc_textField.gridx = 1;
 		gbc_textField.gridy = 1;
-		add(txtFieldMinLettres, gbc_textField);
+		add(txtFieldNbLettresMin, gbc_textField);
 
 		JSeparator separator = new JSeparator();
 		GridBagConstraints gbc_separator = new GridBagConstraints();
@@ -70,14 +77,14 @@ public class PanelDico extends JPanel {
 		gbc_label_1.gridy = 1;
 		add(label_1, gbc_label_1);
 
-		JTextField txtFieldNbrLettresMax = new JTextField();
-		txtFieldNbrLettresMax.setText("10");
-		txtFieldNbrLettresMax.setColumns(2);
+		txtFieldNbLettresMax = new JTextField();
+		txtFieldNbLettresMax.setText("10");
+		txtFieldNbLettresMax.setColumns(2);
 		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
 		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_1.gridx = 4;
 		gbc_textField_1.gridy = 1;
-		add(txtFieldNbrLettresMax, gbc_textField_1);
+		add(txtFieldNbLettresMax, gbc_textField_1);
 
 		JButton btnExport = new JButton("Exporter les mots");
 		btnExport.setVerticalAlignment(SwingConstants.TOP);
@@ -92,4 +99,11 @@ public class PanelDico extends JPanel {
 		add(btnExport, gbc_btnExport);
 	}
 
+	public JTextField getTxtFieldNbLettresMax() {
+		return txtFieldNbLettresMax;
+	}
+
+	public JTextField getTxtFieldNbLettresMin() {
+		return txtFieldNbLettresMin;
+	}
 }
