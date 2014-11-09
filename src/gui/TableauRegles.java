@@ -1,5 +1,7 @@
 package gui;
 
+import gui.actions.ActionSupprRegle;
+
 import javax.swing.JTable;
 import javax.swing.KeyStroke;
 

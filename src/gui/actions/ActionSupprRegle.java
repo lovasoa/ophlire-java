@@ -1,4 +1,6 @@
-package gui;
+package gui.actions;
+
+import gui.TableauRegles;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -12,7 +14,7 @@ public final class ActionSupprRegle extends AbstractAction {
 	/**
 	 * @param table
 	 */
-	ActionSupprRegle(TableauRegles table) {
+	public ActionSupprRegle(TableauRegles table) {
 		super("Supprimer regle");
 		this.table = table;
         putValue(SHORT_DESCRIPTION, "Supprimer la règle");

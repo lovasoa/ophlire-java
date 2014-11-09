@@ -1,5 +1,8 @@
 package gui;
 
+import gui.actions.ActionExportMot;
+import gui.actions.ActionSupprRegle;
+
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -110,75 +113,8 @@ public class MainWindow extends JFrame {
 		btnSuppr.addActionListener(new ActionSupprRegle(tableauRegles));
 		getContentPane().add(pane, BorderLayout.CENTER);
 
-		boutonsDico = new JPanel();
+		boutonsDico = new PanelDico(this);
 		getContentPane().add(boutonsDico, BorderLayout.EAST);
-		boutonsDico.setLayout(new GridBagLayout());
-
-		JLabel lblNombreLettres = new JLabel("Nombre de lettres :");
-		GridBagConstraints gbc_lblNombreLettres = new GridBagConstraints();
-		gbc_lblNombreLettres.insets = new Insets(0, 0, 5, 0);
-		gbc_lblNombreLettres.gridwidth = 5;
-		gbc_lblNombreLettres.anchor = GridBagConstraints.WEST;
-		gbc_lblNombreLettres.gridx = 0;
-		gbc_lblNombreLettres.gridy = 0;
-		boutonsDico.add(lblNombreLettres, gbc_lblNombreLettres);
-
-		JLabel label = new JLabel("min:");
-		GridBagConstraints gbc_label = new GridBagConstraints();
-		gbc_label.anchor = GridBagConstraints.WEST;
-		gbc_label.gridx = 0;
-		gbc_label.gridy = 1;
-		boutonsDico.add(label, gbc_label);
-
-
-
-		JTextField txtFieldMinLettres = new JTextField();
-		txtFieldMinLettres
-				.setToolTipText("nombre minimum de lettres que doit avoir un mot pour être exporté");
-		txtFieldMinLettres.setText("3");
-		txtFieldMinLettres.setHorizontalAlignment(SwingConstants.LEFT);
-		txtFieldMinLettres.setColumns(2);
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.insets = new Insets(0, 0, 5, 5);
-		gbc_textField.gridx = 1;
-		gbc_textField.gridy = 1;
-		boutonsDico.add(txtFieldMinLettres, gbc_textField);
-		
-		JSeparator separator = new JSeparator();
-		GridBagConstraints gbc_separator = new GridBagConstraints();
-		gbc_separator.insets = new Insets(0, 0, 5, 5);
-		gbc_separator.gridx = 2;
-		gbc_separator.gridy = 1;
-		boutonsDico.add(separator, gbc_separator);
-
-		JLabel label_1 = new JLabel("max:");
-		GridBagConstraints gbc_label_1 = new GridBagConstraints();
-		gbc_label_1.weightx = 1.0;
-		gbc_label_1.insets = new Insets(0, 0, 5, 5);
-		gbc_label_1.gridx = 3;
-		gbc_label_1.gridy = 1;
-		boutonsDico.add(label_1, gbc_label_1);
-
-		JTextField txtFieldNbrLettresMax = new JTextField();
-		txtFieldNbrLettresMax.setText("10");
-		txtFieldNbrLettresMax.setColumns(2);
-		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_1.gridx = 4;
-		gbc_textField_1.gridy = 1;
-		boutonsDico.add(txtFieldNbrLettresMax, gbc_textField_1);
-		
-		JButton btnExport = new JButton("Exporter les mots");
-		btnExport.setVerticalAlignment(SwingConstants.TOP);
-		btnExport.setMnemonic('x');
-		btnExport.addActionListener(new ActionExportMot(this));
-		GridBagConstraints gbc_btnExport = new GridBagConstraints();
-		gbc_btnExport.gridwidth = 5;
-		gbc_btnExport.weighty = 1.0;
-		gbc_btnExport.anchor = GridBagConstraints.WEST;
-		gbc_btnExport.gridx = 0;
-		gbc_btnExport.gridy = 2;
-		boutonsDico.add(btnExport, gbc_btnExport);
 	}
 
 	@Override

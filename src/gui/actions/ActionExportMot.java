@@ -1,4 +1,6 @@
-package gui;
+package gui.actions;
+
+import gui.MainWindow;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
