@@ -1,5 +1,5 @@
 package lecteurString;
-import java.util.regex.*;
+import java.util.regex.Pattern;
 
 public class LecteurString {
 	private String str;

@@ -73,13 +73,12 @@ public class Database {
 		}
 	}
 
-	public void exportMatching(File out, ListeRegles liste)
+	public void exportMatching(File out, ListeRegles liste, DbListWordsRequest req)
 			throws FileNotFoundException, SQLException {
 		PrintWriter writer = new PrintWriter(out);
 		ResultSet rs = connection
 				.createStatement()
-				.executeQuery(
-						"SELECT DISTINCT ortho,phono FROM Mot ORDER BY freqlemfilms DESC");
+				.executeQuery(req.toString());
 		int i = 0;
 		while (rs.next()) {
 			System.out.print(++i + "\r");

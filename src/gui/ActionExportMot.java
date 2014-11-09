@@ -9,6 +9,7 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import data.Database;
+import data.DbListWordsRequest;
 
 public class ActionExportMot implements ActionListener {
 	private MainWindow mainWindow;
@@ -30,7 +31,9 @@ public class ActionExportMot implements ActionListener {
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			Database db = mainWindow.getDatabase();
 			try {
-				db.exportMatching(chooser.getSelectedFile(), mainWindow.getTableauRegles().getModel().getListe());
+				db.exportMatching(chooser.getSelectedFile(),
+						mainWindow.getTableauRegles().getModel().getListe(),
+						new DbListWordsRequest());
 			} catch (FileNotFoundException | SQLException e1) {
 				mainWindow.displayError("Erreur lors de l'exportation",
 						"L'exportation a échoué. Message de la base de données:\n"+e1.getMessage());
