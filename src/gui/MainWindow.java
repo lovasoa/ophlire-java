@@ -7,8 +7,10 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JButton;
@@ -159,6 +161,11 @@ public class MainWindow extends JFrame {
 				frm.setJMenuBar(frm.getJMenuBar());
 				frm.setTitle("Ophlire");
 				frm.setName("Ophlire");
+				try {
+					frm.setIconImage(ImageIO.read(this.getClass().getResource("ophlire.png")));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				frm.pack();
 				frm.setDefaultCloseOperation(EXIT_ON_CLOSE);
 				frm.setVisible(true);
