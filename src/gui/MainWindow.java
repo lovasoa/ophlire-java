@@ -1,6 +1,8 @@
 package gui;
 
 import gui.actions.ActionSupprRegle;
+import gui.menus.FileMenu;
+import gui.menus.OphlireMenuBar;
 
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
@@ -136,13 +138,7 @@ public class MainWindow extends JFrame {
 
 	@Override
 	public JMenuBar getJMenuBar() {
-		// Create the menu bar.
-		JMenuBar menuBar = new JMenuBar();
-
-		// Build the first menu.
-		JMenu menu = new FileMenu(this);
-		menuBar.add(menu);
-		return menuBar;
+		return new OphlireMenuBar(this);
 	}
 
 	public static Runnable getRunnable() {
@@ -162,7 +158,8 @@ public class MainWindow extends JFrame {
 				frm.setTitle("Ophlire");
 				frm.setName("Ophlire");
 				try {
-					frm.setIconImage(ImageIO.read(this.getClass().getResource("ophlire.png")));
+					frm.setIconImage(ImageIO.read(this.getClass().getResource(
+							"ophlire.png")));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
