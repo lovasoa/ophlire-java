@@ -157,6 +157,8 @@ public class MainWindow extends JFrame {
 				MainWindow frm = new MainWindow();
 				frm.setLocationByPlatform(true);
 				frm.setJMenuBar(frm.getJMenuBar());
+				frm.setTitle("Ophlire");
+				frm.setName("Ophlire");
 				frm.pack();
 				frm.setDefaultCloseOperation(EXIT_ON_CLOSE);
 				frm.setVisible(true);
