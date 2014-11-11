@@ -1,22 +1,15 @@
 package gui.actions;
 
-import gui.MainWindow;
-
-import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-import javax.swing.BoxLayout;
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
 public class ActionCodes implements ActionListener {
-	private MainWindow mainWindow;
-
-	public ActionCodes(MainWindow mainWindow) {
-		this.mainWindow = mainWindow;
+	public ActionCodes() {
 	}
 
 	@Override
