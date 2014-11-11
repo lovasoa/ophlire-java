@@ -78,6 +78,8 @@ public class PanelDico extends JPanel {
 		add(label_1, gbc_label_1);
 
 		txtFieldNbLettresMax = new JTextField();
+		txtFieldNbLettresMax
+				.setToolTipText("nombre maximum de lettres que doit avoir un mot pour être exporté");
 		txtFieldNbLettresMax.setText("10");
 		txtFieldNbLettresMax.setColumns(2);
 		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
