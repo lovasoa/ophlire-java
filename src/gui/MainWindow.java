@@ -33,6 +33,7 @@ public class MainWindow extends JFrame {
 	private JTextField txtFieldPhono;
 	private Database openedDb = null;
 	private PanelDico panelDico;
+	private JLabel lblNouvelleRgleDe;
 
 	private MainWindow() {
 		createGUI();
@@ -58,18 +59,27 @@ public class MainWindow extends JFrame {
 		};
 		westPanel.setLayout(new GridBagLayout());
 
+		lblNouvelleRgleDe = new JLabel("Nouvelle règle:");
+		GridBagConstraints gbc_lblNouvelleRgleDe = new GridBagConstraints();
+		gbc_lblNouvelleRgleDe.gridwidth = 2;
+		gbc_lblNouvelleRgleDe.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNouvelleRgleDe.gridx = 0;
+		gbc_lblNouvelleRgleDe.gridy = 0;
+		westPanel.add(lblNouvelleRgleDe, gbc_lblNouvelleRgleDe);
+
 		JLabel lblOrtho = new JLabel("Orthographe");
 		GridBagConstraints glbl_lblOrtho = new GridBagConstraints();
 		glbl_lblOrtho.insets = new Insets(0, 0, 5, 5);
-		glbl_lblOrtho.gridy = 0;
+		glbl_lblOrtho.gridy = 1;
 		glbl_lblOrtho.gridx = 0;
 		westPanel.add(lblOrtho, glbl_lblOrtho);
 		txtFieldOrtho = new JTextField();
+		txtFieldOrtho.setToolTipText("Suite de lettres à prononcer");
 		GridBagConstraints gbc_txtFieldOrtho = new GridBagConstraints();
 		gbc_txtFieldOrtho.insets = new Insets(0, 0, 5, 0);
 		gbc_txtFieldOrtho.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtFieldOrtho.gridx = 1;
-		gbc_txtFieldOrtho.gridy = 0;
+		gbc_txtFieldOrtho.gridy = 1;
 		westPanel.add(txtFieldOrtho, gbc_txtFieldOrtho);
 
 		JLabel lblPhono = new JLabel("Phonétique");
@@ -77,35 +87,39 @@ public class MainWindow extends JFrame {
 		gbc_lblPhono.fill = GridBagConstraints.BOTH;
 		gbc_lblPhono.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPhono.gridx = 0;
-		gbc_lblPhono.gridy = 1;
+		gbc_lblPhono.gridy = 2;
 		westPanel.add(lblPhono, gbc_lblPhono);
 		txtFieldPhono = new JTextField();
+		txtFieldPhono.setToolTipText("<html>son produit<br>"
+				+ "(voir <i>Aide&gt;<b>Notations phonétique</b></i>)</html>");
 		GridBagConstraints gbc_txtFieldPhono = new GridBagConstraints();
 		gbc_txtFieldPhono.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtFieldPhono.insets = new Insets(0, 0, 5, 0);
 		gbc_txtFieldPhono.gridx = 1;
-		gbc_txtFieldPhono.gridy = 1;
+		gbc_txtFieldPhono.gridy = 2;
 		westPanel.add(txtFieldPhono, gbc_txtFieldPhono);
 		txtFieldPhono.setAction(actionAjouter);
 
 		btnAdd = new JButton("Ajouter");
+		btnAdd.setToolTipText("Ajouter la règle");
 		GridBagConstraints gbc_btnAdd = new GridBagConstraints();
 		gbc_btnAdd.anchor = GridBagConstraints.NORTH;
 		gbc_btnAdd.weighty = 1.0;
 		gbc_btnAdd.insets = new Insets(0, 0, 0, 5);
 		gbc_btnAdd.gridx = 0;
-		gbc_btnAdd.gridy = 3;
+		gbc_btnAdd.gridy = 4;
 		westPanel.add(btnAdd, gbc_btnAdd);
 		btnAdd.addActionListener(actionAjouter);
 
 		getContentPane().add(westPanel, BorderLayout.WEST);
 
 		JButton btnSuppr = new JButton("Supprimer");
+		btnSuppr.setToolTipText("Supprimer la règle sélectionnée");
 		GridBagConstraints gbc_btnSuppr = new GridBagConstraints();
 		gbc_btnSuppr.anchor = GridBagConstraints.NORTH;
 		gbc_btnSuppr.weighty = 1.0;
 		gbc_btnSuppr.gridx = 1;
-		gbc_btnSuppr.gridy = 3;
+		gbc_btnSuppr.gridy = 4;
 		westPanel.add(btnSuppr, gbc_btnSuppr);
 		btnSuppr.addActionListener(new ActionSupprRegle(tableauRegles));
 		getContentPane().add(pane, BorderLayout.CENTER);
