@@ -89,6 +89,9 @@ public class PanelDico extends JPanel {
 		add(txtFieldNbLettresMax, gbc_textField_1);
 
 		JButton btnExport = new JButton("Exporter les mots");
+		btnExport.setToolTipText("<html>Exporter les mots dont la prononciation<br>"
+				+ "correspond aux règles définies<br>"
+				+ "et qui utilisent les règles sélectionnées</html>");
 		btnExport.setVerticalAlignment(SwingConstants.TOP);
 		btnExport.setMnemonic('x');
 		btnExport.addActionListener(new ActionExportMot(this.mainWindow));
