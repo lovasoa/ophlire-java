@@ -3,7 +3,7 @@ package gui.menus;
 import gui.MainWindow;
 import gui.actions.ActionExportMot;
 import gui.actions.ActionFileOpen;
-import gui.actions.ActionCodes;
+import gui.actions.ActionFileSave;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -33,7 +33,7 @@ public class FileMenu extends JMenu {
 		JMenuItem save = new JMenuItem("Sauvegarder", KeyEvent.VK_S);
 		save.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
 				ActionEvent.CTRL_MASK));
-		save.addActionListener(new ActionCodes(mainWindow));
+		save.addActionListener(new ActionFileSave(mainWindow));
 		add(save);
 
 		JMenuItem export = new JMenuItem("Exporter", KeyEvent.VK_E);
