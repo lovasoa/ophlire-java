@@ -77,6 +77,7 @@ public class Database {
 	public void exportMatching(File out, ListeRegles liste,
 			ListeRegles selection, DbListWordsRequest req)
 			throws FileNotFoundException, SQLException {
+		double startTime = System.currentTimeMillis();
 		PrintWriter writer = new PrintWriter(out);
 		ResultSet rs = connection.createStatement()
 				.executeQuery(req.toString());
@@ -91,7 +92,10 @@ public class Database {
 			}
 		}
 		writer.close();
-		System.out.println("Recherche terminée");
+		double endTime = System.currentTimeMillis();
+		System.out.printf(
+				"Recherche terminée. La recherche a pris %g secondes.\n",
+				(endTime - startTime) / 1000);
 	}
 
 	public void exportMatching(File out, ListeRegles liste,
