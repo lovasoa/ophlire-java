@@ -19,7 +19,7 @@ public class Mot {
 	}
 
 	public ListeRegles listeReglesPhonetiques(
-			Iterable<ReglePhonetique> reglesPhonetiques) {
+			ListeRegles reglesPhonetiques) {
 		LecteurMot lecteur = new LecteurMot(this);
 		ListeRegles liste = new ListeRegles();
 

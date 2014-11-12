@@ -2,8 +2,6 @@ package phonetique;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-import java.util.ArrayList;
-
 import org.junit.Test;
 
 /**
@@ -15,7 +13,7 @@ public class TestMot {
 	@Test
 	public void testListeReglesPhonetiques() {
 		// Création des règles de prononciation (l'ordre est important)
-		ArrayList<ReglePhonetique> regles = new ArrayList<>();
+		ListeRegles regles = new ListeRegles();
 		regles.add(new RegleSubstitution("d", "d"));
 		// '@' correspond au son 'an' comme dans "enfant" (@f@)
 		regles.add(new RegleSubstitution("an", "@"));
