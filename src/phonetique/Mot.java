@@ -1,6 +1,5 @@
 package phonetique;
 
-
 public class Mot {
 	private String orthographe;
 	private String phonetique;
@@ -18,20 +17,7 @@ public class Mot {
 		return orthographe;
 	}
 
-	public ListeRegles listeReglesPhonetiques(
-			ListeRegles reglesPhonetiques) {
-		LecteurMot lecteur = new LecteurMot(this);
-		ListeRegles liste = new ListeRegles();
-
-		recherche: while (true) {
-			for (ReglePhonetique r : reglesPhonetiques) {
-				if (r.appliquer(lecteur) != null) {
-					liste.add(r);
-					continue recherche;
-				}
-			}
-			// Aucune regle de substitution trouvee
-			return (lecteur.isFinished()) ? liste : null;
-		}
+	public ListeRegles listeReglesPhonetiques(ListeReglesRecherche rech) {
+		return rech.getListeRegles(new LecteurMot(this));
 	}
 }

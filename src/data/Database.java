@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import phonetique.ListeRegles;
+import phonetique.ListeReglesRecherche;
 import phonetique.Mot;
 import phonetique.ReglePhonetique;
 import phonetique.RegleRegex;
@@ -78,6 +79,7 @@ public class Database {
 			ListeRegles selection, DbListWordsRequest req)
 			throws FileNotFoundException, SQLException {
 		double startTime = System.currentTimeMillis();
+		ListeReglesRecherche recherche = new ListeReglesRecherche(liste);
 		PrintWriter writer = new PrintWriter(out);
 		ResultSet rs = connection.createStatement()
 				.executeQuery(req.toString());
@@ -85,7 +87,7 @@ public class Database {
 		while (rs.next()) {
 			System.out.print(++i + "\r");
 			Mot m = new Mot(rs.getString(1), rs.getString(2));
-			ListeRegles reglesMot = m.listeReglesPhonetiques(liste);
+			ListeRegles reglesMot = m.listeReglesPhonetiques(recherche);
 			if (reglesMot != null
 					&& (selection == null || reglesMot.containsAll(selection))) {
 				writer.println(m.getOrthographe());

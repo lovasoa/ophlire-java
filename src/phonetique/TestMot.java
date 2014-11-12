@@ -1,4 +1,5 @@
 package phonetique;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
@@ -30,21 +31,24 @@ public class TestMot {
 		Mot dans = new Mot("dans", "d@");
 		Mot enfant = new Mot("dansant", "d@s@");
 		Mot esse = new Mot("esse", "Es");
-		
 
-		assertEquals(
-				"[(s -> s), (an -> @), (s$ -> )]",
-				sans.listeReglesPhonetiques(regles).toString());
+		ListeReglesRecherche rech = new ListeReglesRecherche(regles);
 
-		assertEquals(
-				"[(d -> d), (an -> @), (s$ -> )]",
-				dans.listeReglesPhonetiques(regles).toString());
+		double startTime = System.currentTimeMillis();
+		assertEquals("[(s -> s), (an -> @), (s$ -> )]", sans
+				.listeReglesPhonetiques(rech).toString());
+
+		assertEquals("[(d -> d), (an -> @), (s$ -> )]", dans
+				.listeReglesPhonetiques(rech).toString());
 
 		assertEquals(
 				"[(e(?=[bcdfghklmnpqrstvwxz]{2}) -> E), (ss -> s), (e$ -> )]",
-				esse.listeReglesPhonetiques(regles).toString());
-		
-		// On n'a pas précisé de règle pour prononcer 't', on ne peut donc pas prononcer 'dansant'
-		assertNull(enfant.listeReglesPhonetiques(regles));
+				esse.listeReglesPhonetiques(rech).toString());
+
+		// On n'a pas précisé de règle pour prononcer 't', on ne peut donc pas
+		// prononcer 'dansant'
+		assertNull(enfant.listeReglesPhonetiques(rech));
+		double endTime = System.currentTimeMillis();
+		System.out.printf("Search time: %g ms.\n", (endTime-startTime));
 	}
 }
