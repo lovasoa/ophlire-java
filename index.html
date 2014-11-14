@@ -52,15 +52,74 @@
 
 <p>Recherche de mots du lexique français par les phonèmes qu'ils contiennent et leur réalisation orthographique.</p>
 
-<h2>
-<a id="objectif" class="anchor" href="#objectif" aria-hidden="true"><span class="octicon octicon-link"></span></a>Objectif</h2>
+<h2>Objectif</h2>
 
-<p>Générer des listes de mots qui «s'écrivent comme ils se prononcent», ou
-de mots qui contiennent une diphtongue particulière, par exemple.</p>
+<p>
+Générer des listes de mots qui dont la pronociation répond à certaines règles.
+</p>
+<p>
+Cela permet par exemple d'obtenir des listes de mots qui
+  <ul>
+    <li>«s'écrivent comme ils se prononcent»,</li>
+    <li>se terminent par un e muet,</li>
+    <li>contiennent un o ouvert,</li>
+    <li>contiennent la diphtongue «an»,</li>
+    <li>... et bien d'autres choses.</li>
+  </ul>
+</p>
+
+<h2>Captures d'écran</h2>
+<p>
+<img src="images/screenshots/ophlire-main.png"
+    alt="Capture d'écran de la fenêtre principale du logiciel"
+    /> 
+</p>
+
+<h2>Instructions d’utilisation</h2>
+<p>Tout d'abord, téléchargez le dictionnaire et une base de données de vocabulaire.</p>
+<h3>Chargement de la base de données</h3>
+<p>
+  Une fois dans le logiciel, allez dans <code>Ficher &gt; Ouvrir</code> et
+ouvrez la base de données de vocabulaire et de règles précédemment téléchargée.
+  Les règles de prononciation de la base apparaissent dans la fenêtre principale.
+</p>
+<h3>Ajout de règles</h3>
+<p>Une <b>règle de prononciation</b> telle que comprise par le logiciel est 
+la correspondance entre un orthographe (une suite de lettres) et une prononciation
+(une suite de phonèmes).</p>
+<p>Pour rentrer un orthographe, on rentre la plupart du temps simplement une suite de lettres. On
+peut aussi exprimer des règles plus complexes à l'aide d'<a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Expressions_r%C3%A9guli%C3%A8res#.C3.89crire_une_expression_r.C3.A9guli.C3.A8re">expressions régulières</a>. Pour cela,
+rentrez dans le champ 'Orthographe' une expression régulière entourée de deux
+caractères <code>/</code>. Par exemple, pour créer une règle correspondant à
+un e muet en fin de mot, tapez <code>/e$/</code>.</p>
+<p>Pour noter la phonétique, le logiciel n'utilise pas l'alphabet phonétique
+international, mais la convention du projet <a href="http://lexique.org">lexique.org</a>.
+Pour trouver le code correspondant à un phonème, dans le menu du logiciel, choisissez
+<code>Aide &gt; Codes phonémiques</code>.
+</p>
+<p>On peut définir plusieurs règles correspondant au même orthographe.
+Si deux règles sont en conflit, la première dans la liste
+sera utilisée. Par exemple, vous pouvez sans problème définir une règle avec
+comme orthographe <code>s</code> et comme phonétique <code>s</code> et une autre
+règle avec le même orthographe, et la phonétique <code>z</code>.</p>
+<h3>Génération de listes de vocabulaire</h3>
+<p>
+Le logiciel permet de générer des listes de mots qui correspondent aux règles définies
+à l'étape précédente. Un mot ne sera jamais exporté si le logiciel n'arrive pas
+à le prononcer à l'aide des règles que vous avez définies.
+</p>
+<p>Le logiciel exporte tous les mots dont la prononciation utilise les
+règles sélectionnées</p>
+<p>Sélectionnez à l'aide de la souris les règles de prononciation à utiliser
+dans les mots exporter. Vous pouvez sélectionner plusieurs règles en appuyant sur
+ctrl en en cliquant sur les règles les unes après les autres.</p>
+<p>Cliquez sur <b>Exporter les mots</b>, choisissez le nom du fichier (.txt)
+qui contiendra la liste, et validez.
+</p>
 
 <h2>Téléchargements</h2>
 <p> Pour utiliser Ophlire, vous aurez besoin du logiciel lui-même, et d'une
-base de données qui contient le vocabulaire et les règles de prononciations.
+base de données qui contient le vocabulaire et les règles de prononciation.
 Vous pouvez télécharger ci-dessous une base de données qui contient l’ensemble
 des mots français référencés par <a href="http://lexique.org">lexique.org</a>, 
 et certaines règles de prononciations basiques du français.
