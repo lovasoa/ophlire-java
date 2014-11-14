@@ -4,6 +4,7 @@ import java.util.Hashtable;
 
 public class ListeReglesRecherche {
 	private Hashtable<String, ListeRegles> phonoLookup;
+	private int maxLen = 0;
 
 	public ListeReglesRecherche(ListeRegles l) {
 		this.phonoLookup = new Hashtable<>();
@@ -13,8 +14,15 @@ public class ListeReglesRecherche {
 	}
 
 	private void ajouterRegle(ReglePhonetique r) {
-		String phono = (r instanceof RegleSubstitution) ? r.getPhono()
-				.toString() : "";
+		String phono;
+		if (r instanceof RegleSubstitution) {
+			phono = r.getPhono().toString();
+			if (phono.length() > this.maxLen) {
+				this.maxLen = phono.length();
+			}
+		} else {
+			phono = "";
+		}
 		ListeRegles l = phonoLookup.get(phono);
 		if (l == null) {
 			l = new ListeRegles();
@@ -26,7 +34,8 @@ public class ListeReglesRecherche {
 	private ListeRegles getPotentialMatches(LecteurMot lecteurMot) {
 		ListeRegles l = new ListeRegles();
 		String end = lecteurMot.getLecteurPhono().getEnd();
-		for (int i = 0; i <= end.length(); i++) {
+		int nlettres = Math.min(maxLen, end.length());
+		for (int i = 0; i <= nlettres; i++) {
 			ListeRegles subl = phonoLookup.get(end.substring(0, i));
 			if (subl != null) {
 				l.addAll(subl);
