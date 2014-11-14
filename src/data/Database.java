@@ -85,7 +85,10 @@ public class Database {
 				.executeQuery(req.toString());
 		int i = 0;
 		while (rs.next()) {
-			System.out.print(++i + "\r");
+			i++;
+			if (i % 5000 == 0) {
+				System.out.print(i + "\r");
+			}
 			Mot m = new Mot(rs.getString(1), rs.getString(2));
 			ListeRegles reglesMot = m.listeReglesPhonetiques(recherche);
 			if (reglesMot != null
