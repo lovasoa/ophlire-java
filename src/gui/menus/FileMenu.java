@@ -29,7 +29,7 @@ public class FileMenu extends JMenu {
 				ActionEvent.CTRL_MASK));
 		ouvrir.addActionListener(new ActionFileOpen(mainWindow));
 		add(ouvrir);
-		
+
 		JMenuItem save = new JMenuItem("Sauvegarder", KeyEvent.VK_S);
 		save.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
 				ActionEvent.CTRL_MASK));
@@ -37,8 +37,8 @@ public class FileMenu extends JMenu {
 		add(save);
 
 		JMenuItem export = new JMenuItem("Exporter", KeyEvent.VK_E);
-		save.addActionListener(new ActionExportMot(mainWindow));
+		export.addActionListener(new ActionExportMot(mainWindow));
 		add(export);
 	}
-	
+
 }
