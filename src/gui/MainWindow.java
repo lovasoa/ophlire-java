@@ -8,6 +8,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -15,7 +16,6 @@ import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
@@ -23,7 +23,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import data.Database;
 
@@ -174,24 +173,23 @@ public class MainWindow extends JFrame {
 
 	public Database getDatabase() {
 		if (openedDb == null) {
-			// Choix d'un fichier de base de données
-			JFileChooser chooser = new JFileChooser();
-			chooser.setDialogTitle("Base de données de mots et règles orthographiques");
-			FileNameExtensionFilter filter = new FileNameExtensionFilter(
-					"Base de données SQLite de dictionnaire et règles de prononciation",
-					"db");
-			chooser.setFileFilter(filter);
-			int returnVal = chooser.showOpenDialog(this);
-			if (returnVal == JFileChooser.APPROVE_OPTION) {
-				try {
-					openedDb = new Database(chooser.getSelectedFile());
-				} catch (ClassNotFoundException | SQLException e1) {
-					displayError(
-							"Erreur à l'ouverture de la base",
-							"Impossible d'ouvrir la base de données:\n"
-									+ e1.getMessage());
+			getNewDatabase();
+		}
+		return openedDb;
+	}
 
-				}
+	public Database getNewDatabase() {
+		// Choix d'un fichier de base de données
+		File dbFile = NativeFileDialog.openDb(this, openedDb);
+		if (dbFile != null) {
+			try {
+				openedDb = new Database(dbFile);
+			} catch (ClassNotFoundException | SQLException e1) {
+				displayError(
+						"Erreur à l'ouverture de la base",
+						"Impossible d'ouvrir la base de données:\n"
+								+ e1.getMessage());
+
 			}
 		}
 		return openedDb;

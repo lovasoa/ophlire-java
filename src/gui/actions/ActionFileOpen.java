@@ -17,14 +17,15 @@ public class ActionFileOpen implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		Database db = mainWindow.getDatabase();
+		Database db = mainWindow.getNewDatabase();
 		if (db != null) {
 			try {
 				mainWindow.getTableauRegles().getModel()
 						.setListe(db.getListeRegles());
 			} catch (SQLException e1) {
 				mainWindow.displayError("Format invalide",
-						"La base n'a pas le bon format" + e1.getMessage());
+						"La base " + db.getFile() + " n'a pas le bon format: \n"
+								+ e1.getMessage());
 			}
 		}
 	}

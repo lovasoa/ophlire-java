@@ -18,8 +18,10 @@ import phonetique.RegleSubstitution;
 
 public class Database {
 	Connection connection;
+	File file;
 
 	public Database(File f) throws ClassNotFoundException, SQLException {
+		this.file = f;
 		// load the sqlite-JDBC driver using the current class loader
 		Class.forName("org.sqlite.JDBC");
 		this.connection = DriverManager.getConnection("jdbc:sqlite:"
@@ -106,5 +108,9 @@ public class Database {
 	public void exportMatching(File out, ListeRegles liste,
 			DbListWordsRequest req) throws FileNotFoundException, SQLException {
 		exportMatching(out, liste, null, req);
+	}
+
+	public File getFile() {
+		return file;
 	}
 }
